@@ -1,0 +1,45 @@
+Task List
+
+Program to demonstrate PHP OO design, DB access, and GIT management.
+
+Phase 1:
+================================
+Create simple task list application.  Each row is a task with the following information:
+
+Start Date - Task Title - End Date - Completed Checkbox (Tick)
++ New task button at bottom of task list.
+
+NOTE: If the task row is clicked then it can show further details/comments about the task.  What should be displayed is the same form used to create the task so all fields can be edited, ie. Start date, Task Title, End Date, and Completed checkbox.
+
+Add/Update form:
+
+Start Date: <dd>-<mmm>-<yy> (use datecontrol.js)
+End Date: <dd>-<mmm>-<yy>   (use datecontrol.js)
+Title: <input type="text">
+Comments/Details: <textarea>
+Completed <checkbox>
+Submit: button
+Delete: button (but don't show when creating a new task)
+
+Allow for add/update and deletion of tasks.  Tasks can be updated by simply updating the input fields
+
+DB tables:
+<tbc>
+
+Phase 2:
+Allow user logins, use cookies $_COOKIE[], and session data $_SESSION[].
+
+Phase 3:
+Make UI/UX better with styling.
+Sending of Email Reminders.
+
+Phase 4:
+Password generator.
+Email confirmation generator.
+
+----
+
+dateField={elem:"From",day:1,month:1,year:2016}; // Object to contain date selection elements
+dateField.prototype.setDate; // Prototype functions for dateField objects
+dateFieldList[]=dateField; // Array of date field objects
+event listener attach to a particular dateFieldList array object.
