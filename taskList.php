@@ -5,17 +5,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="taskList.css">
 	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+	<?php require 'dbControl.php'; require 'taskManager.php';?>
 </head>
 <body>
 	<div class="pageHeading">Task List</div>
 
 	<div id="taskListPanel">
-		<center>No tasks to display!</center>
+		<!-- TODO: Check for post incase db needs updating before reading. -->
+		<?php getTasks();?>
 	</div>
 
 	<div id="taskForm">
 	<!-- 	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> -->
-	<form>
+	<form id="formData" method="POST" onsubmit="return validateForm();">
 		<div style="margin-left: 7%; margin-right: 7%; padding-bottom: 20px;">
 			Title: <input style="width: 100%;" class="formFields" type="text" name="title">
 		</div>
@@ -53,7 +55,7 @@
 
 		<div style="width: 90%; margin: auto; padding-top: 20px;">
 			<input type="button" name="delete" value="Delete" class="formFields" id="cancelButton">
-			<input type="submit" name="submit" value="Save" class="formFields" id="saveButton">
+			<input type="submit" name="submit" value="Save" class="formFields" id="saveButton" formaction="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		</div>
 	</form>
 	</div>
