@@ -33,6 +33,7 @@ function expandTask(taskId) {
 		taskElem.style.height="315px"; // Was 300px;
 		taskElem.style.backgroundColor="white";
 		document.getElementById("cancelButton").value="Remove";
+		document.getElementById("saveButton").value="Save";
 		taskElemTitle.style.display="none";
 		lastTaskId=taskId;
 	}
@@ -67,13 +68,35 @@ function newTask() {
 	formElem.style.top="124px";
 	document.getElementById("newTaskForm").style.display="block";
 	document.getElementById("cancelButton").value="Cancel";
+	document.getElementById("saveButton").value="Create";
 }
 
+/* Frontend Task Form Validation Routine */
 function validateForm() {
+	// Obtain Form Data
 	var title=document.forms["formData"]["title"].value;
+	var dayFrom=document.getElementById("dayFrom").value;
+	var monthFrom=document.getElementById("monthFrom").selectedIndex;
+	var yearFrom=document.getElementById("yearFrom").value;
+	var dayToo=document.getElementById("dayToo").value;
+	var monthToo=document.getElementById("monthToo").selectedIndex;
+	var yearToo=document.getElementById("yearToo").value;
 
-	// Test Fullname field
-	if (title==null || title=="") { alert("Title is required!"); return false;}
+	// Check task title field has a value
+	if (title==null || title=="") { 
+		alert("Title is required!");
+		return false;
+	}
+
+	// Convert HTML date elements into a JS Date object
+	var dateFrom=new Date(yearFrom,monthFrom,dayFrom);
+	var dateToo=new Date(yearToo,monthToo,dayToo);
+
+	// Check to see if from date is not ahead too date
+	if (dateFrom > dateToo) {
+		alert("The End Date must be on or after the Start Date!");
+		return false;
+	}
 
 	// TODO: Do testing for endDate being before startDate
 	return true;
