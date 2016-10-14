@@ -68,3 +68,13 @@ function newTask() {
 	document.getElementById("newTaskForm").style.display="block";
 	document.getElementById("cancelButton").value="Cancel";
 }
+
+function validateForm() {
+	var title=document.forms["formData"]["title"].value;
+
+	// Test Fullname field
+	if (title==null || title=="") { alert("Title is required!"); return false;}
+
+	// TODO: Do testing for endDate being before startDate
+	return true;
+}

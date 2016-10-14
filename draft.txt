@@ -24,7 +24,18 @@ Delete: button (but don't show when creating a new task)
 Allow for add/update and deletion of tasks.  Tasks can be updated by simply updating the input fields
 
 DB tables:
-<tbc>
+id: 		int not null auto_increment primary key
+startDate	bigint unsigned
+endDate:	bigint unsigned
+title:		varchar(255)
+comments:	text
+email:		varchar(255)
+
+Login: mysql -u taskuser -p<password> tasklist
+
+Create Class "dbControl" to handle DB calls.  ie. open, insert, update and delete.  File: dbControl.php
+Create Class "taskManager" that creates an instance of "dbControl" and uses it's db routines.  File: taskManager.php
+Require "taskView.php" which is a extended by taskManager and assist with IO validation and UI construction.
 
 Phase 2:
 Allow user logins, use cookies $_COOKIE[], and session data $_SESSION[].
