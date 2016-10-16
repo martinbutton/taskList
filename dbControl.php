@@ -1,5 +1,9 @@
 <?php
-/* dbControl Class - Manages db connection and operations */
+
+/* dbControl Class - Manages db connection and operations
+ * - M.Button.
+ */
+
 class dbControl {
 	// Object Field Variables
 	private $server,$database,$username,$password;
