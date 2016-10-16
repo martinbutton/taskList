@@ -1,9 +1,10 @@
-/* Task Control Script
- * - M.Button
+/* Task List: Task Control Script
+ * - M.Button.
  */
 
- var formElem=document.getElementById("taskForm");
- var lastTaskId="closed";
+var formElem=document.getElementById("taskForm"); // Task Form Element
+var lastTaskId="closed"; // Task Select Toggle
+var formBtn; // Holds a value to say which form button has been clicked
 
 /* Expand Selected Task and close others that might be open */
 function expandTask(taskId) {
@@ -71,8 +72,27 @@ function newTask() {
 	document.getElementById("saveButton").value="Create";
 }
 
-/* Frontend Task Form Validation Routine */
+/* pressBtn(btn) My JS Hack.  M.Button.
+ * ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ * This function is called by 'onclick' event assigned to each form button.
+ * The buttons name field is passed to this function and stored as a global variable which is later used by the 
+ * validateForm() function called by onsubmit.
+ */
+ function pressBtn(btn) {
+	formBtn=btn;
+}
+
+/* Frontend Task Form Validation Routine called by forms 'onsubmit' event */
 function validateForm() {
+	// Check if 'delCancel' or 'submit' button was clicked and check buttons current value to determine if this is
+	// a delete task request or a cancelation when creating a new event.
+	if (formBtn=="delCancel") {
+		if (document.getElementById('cancelButton').value=="Cancel") { return true; }
+
+		// TODO: Provide 'Are you sure you want to delete this Task' dialog box here.
+		return false;
+	}
+
 	// Obtain Form Data
 	var title=document.forms["formData"]["title"].value;
 	var dayFrom=document.getElementById("dayFrom").value;
@@ -98,6 +118,5 @@ function validateForm() {
 		return false;
 	}
 
-	// TODO: Do testing for endDate being before startDate
 	return true;
 }
