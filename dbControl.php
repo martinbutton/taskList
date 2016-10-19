@@ -31,7 +31,7 @@ class dbControl {
 	public function readDbTasks() {
 		try {
 			// Prepare Select Statement
-			$sqlstm=$this->sqlconn->prepare("select id, startDate, endDate, title, comments, email from tasks");
+			$sqlstm=$this->sqlconn->prepare("select id, startDate, endDate, title, comments, email from tasks order by endDate");
 			$sqlstm->execute();
 
 			// Set the resulting array to be associative

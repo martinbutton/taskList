@@ -37,6 +37,8 @@ function expandTask(taskId) {
 		document.getElementById("saveButton").value="Save";
 		taskElemTitle.style.display="none";
 		lastTaskId=taskId;
+
+		taskDetails(taskId);
 	}
 }
 
@@ -45,11 +47,45 @@ function formPos(taskId) {
 	var yPos=135;
 
 	if (taskId.length > 4) {
-		taskNum=taskId.slice(4); // Extract task number from the end of the task Id
+		var taskNum=taskId.substring(4,taskId.indexOf("-"));
 		yPos+=(taskNum * 75); // 75px addon for each task
 	}
 
 	return yPos;
+}
+
+/* Update form with selected tasks data */
+function taskDetails(taskId) {
+	// Create a xmlhttp object for AJAX
+	if (window.XMLHttpRequest) {
+		// For IE7+, Firefox, Chromw, Safari and Opera
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {
+		// For IE5 and IE6
+		xmlhttp=new ActiveXObject(Microsoft.XMlHTTP);
+	}
+
+	// Wait for backend to return data, then insert into form fields
+	xmlhttp.onreadystatechange=function() {
+		if (this.readyState==4 && this.status==200) {
+			var taskDetailsJSON=JSON.parse(this.responseText);
+
+			// Set title and comment fields
+			document.getElementById('title').value=taskDetailsJSON.title;
+			document.getElementById("comments").innerHTML=taskDetailsJSON.comments;
+
+			// Set Start and End date selectors
+			var dateFrom=new Date(+taskDetailsJSON.startDate*1000);
+			var dateToo=new Date(+taskDetailsJSON.endDate*1000);
+			setCustomDate("From",dateFrom.getDate(),dateFrom.getMonth()+1,dateFrom.getFullYear());
+			setCustomDate("Too",dateToo.getDate(),dateToo.getMonth()+1,dateToo.getFullYear());
+		}
+	}
+
+	// Send AJAX request to backend
+	xmlhttp.open("GET","getFormData.php?task="+taskId,true);
+	xmlhttp.send();
 }
 
 /* Add a new task */

@@ -1,3 +1,4 @@
+<?PHP session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 	<div id="taskForm">
 	<form id="formData" method="POST" onsubmit="return validateForm();" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<div style="margin-left: 7%; margin-right: 7%; padding-bottom: 20px;">
-			Title: <input style="width: 100%;" class="formFields" type="text" name="title">
+			Title: <input style="width: 100%;" class="formFields" type="text" name="title" id="title">
 		</div>
 
 		<div id="dateFrom">
@@ -49,7 +50,7 @@
 
 		<div id="commentBox">
 			Comments:<br>
-			<textarea name="comments" class="formFields" style="width: 100%; resize: none;" rows="3"></textarea>
+			<textarea id="comments" name="comments" class="formFields" style="width: 100%; resize: none;" rows="3"></textarea>
 		</div>
 
 		<div style="width: 90%; margin: auto; padding-top: 20px;">

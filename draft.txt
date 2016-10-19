@@ -33,9 +33,11 @@ email:		varchar(255)
 
 Login: mysql -u taskuser -p<password> tasklist
 
-Create Class "dbControl" to handle DB calls.  ie. open, insert, update and delete.  File: dbControl.php
-Create Class "taskManager" that creates an instance of "dbControl" and uses it's db routines.  File: taskManager.php
-Require "taskView.php" which is a used by taskManager and assist with IO validation and UI construction.
+- Create Class "dbControl" to handle DB calls.  ie. open, insert, update and delete.  File: dbControl.php
+- Create "taskView.php" to handle task representation HTML UI output and input validation.  taskView creates a sanitizedPost[] array which is a dbResults object.
+- Create "taskManager.php" that creates an instance of "dbControl" and requires "taskView" and uses it's routines for display and validation.
+- Create "getFormData.php" used by AJAX to display data in "taskControl.js:taskDetails();" so that is can display form field values.
+- form ID should be in the form: task<FE ID>-<DB ID>, ie. task0-6
 
 Phase 2:
 Allow user logins, use cookies $_COOKIE[], and session data $_SESSION[].
