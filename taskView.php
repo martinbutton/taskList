@@ -101,15 +101,4 @@ function validateTask() {
 	// Return sanitised array
 	$sanitisedPost=array("startDate"=>$dateFrom,"endDate"=>$dateToo,"title"=>$title,"comments"=>$comments);
 	return $sanitisedPost;
-
-/*	-- Check Code --
-
-	echo "dateFrom :" . $dateFrom . ", dateToo: " . $dateToo . "<br>";
-
-	// Conversion Code to check time stamp
-	$convDateFrom=getDate($dateFrom);
-	$convDateToo=getDate($dateToo);
-	echo "CONV: Day From: " . $convDateFrom['mday'] . " " . $convDateFrom['month'] . " " . $convDateFrom['year'] . "<br>";
-	echo "CONV: Day Too: " . $convDateToo['mday'] . " " . $convDateToo['month'] . " " . $convDateToo['year'] . "<br>";
-*/
 }

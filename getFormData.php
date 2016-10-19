@@ -1,5 +1,5 @@
 <?PHP
-/* Task List: Validates data before it is stored in DB.  Creates HTML UI task elements when data is read from DB.
+/* Task List: Process AJAX request and return a DB entry JSON object to FE.
  * - M.Button.
  */
 
@@ -12,16 +12,14 @@ function getFormDetails() {
 	// Obtain task ID representing the task in the DB
 	if (strlen($_REQUEST['task'])>6) {
 		$taskId=substr($_REQUEST['task'],strpos($_REQUEST['task'],"-")+1);
-		// echo "DB Task ID: " . $taskId;
 	}
 	else {
-		echo "Failed!";
+		echo "{\n\"title\": \"" . JSONescapes($sqlvalues['title']) . "\"\n}\n";
 		die;
 	}
 
 	// Obtain DB records from session data
 	$sqlrecords=$_SESSION['taskRecords'];
-	// print_r($sqlrecords);
 
 	// Search for task details and return a JSON object.
 	echo "{\n";

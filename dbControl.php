@@ -73,7 +73,6 @@ class dbControl {
 		$sqlcmd.="title='" . $title . "', ";
 		$sqlcmd.="comments='" . $comments . "' ";
 		$sqlcmd.="where id=" . $id;
-//		echo $sqlcmd;
 
 		try {
 			$sqlstm=$this->sqlconn->prepare($sqlcmd);
@@ -81,7 +80,20 @@ class dbControl {
 			return true;
 		}
 		catch (PDOException $e) {
-			echo $e->getMessage();
+			return false;
+		}
+	}
+
+	/* Delete a task in the database */
+	public function deleteDbTask($id) {
+		$sqlcmd="delete from tasks where id=" . $id;
+
+		try {
+			$sqlstm=$this->sqlconn->prepare($sqlcmd);
+			$sqlstm->execute();
+			return true;
+		}
+		catch (PDOException $e) {
 			return false;
 		}
 	}
