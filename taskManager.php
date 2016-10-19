@@ -51,6 +51,7 @@ function checkPost() {
 			$saveBtn=clean_input($_POST['submit']);
 			if ($saveBtn=="Create") { newTask(); }
 			// TODO: Add update function call here.
+			if ($saveBtn=="Save") { updateTask(); }
 		}
 
 		if (array_key_exists("delCancel", $_POST)) {
@@ -60,6 +61,27 @@ function checkPost() {
 
 		// echo "Save Value: " . $saveBtn . ", Forget Button: " . $delCancelBtn . "<br>";
 	}
+}
+
+function updateTask() {
+	if (($sanitisedPost=validateTask())==null) { return; }
+
+	$taskId=$_SESSION['taskDbId'];
+	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
+
+	// Do update here
+	if ($dbAccess->updateDbTask($taskId,$sanitisedPost['startDate'], $sanitisedPost['endDate'], $sanitisedPost['title'], $sanitisedPost['comments'], "marty@outerorbit.org" )) {
+		$dbAccess->closeDb();
+		return; // Write Successful.
+	}
+	else  {
+		echo "<center>Error: Problems writing task update to database.";
+		echo "<p>Back end change not accepted!</p>";
+		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 	
+	}
+
+	// Close DB Connection
+	$dbAccess->closeDb();
 }
 
 /* Create a new task */

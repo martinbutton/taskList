@@ -28,12 +28,26 @@ function getFormDetails() {
 	foreach ($sqlrecords as $sqlvalues) {
 		if ($sqlvalues['id']==$taskId) {
 			echo "\"id\": \"" . $sqlvalues['id'] . "\",\n";
-			echo "\"title\": \"" . $sqlvalues['title'] . "\",\n";
+			echo "\"title\": \"" . JSONescapes($sqlvalues['title']) . "\",\n";
 			echo "\"startDate\": \"" . $sqlvalues['startDate'] . "\",\n";
 			echo "\"endDate\": \"" . $sqlvalues['endDate'] . "\",\n";
-			echo "\"comments\": \"" . $sqlvalues['comments'] . "\"\n";
+			echo "\"comments\": \"" . JSONescapes($sqlvalues['comments']) . "\"\n";
 		}
 	}
 	echo "}\n";
+
+	// Update taskId session varable with current returned task Id.
+	// This can then be used with update and delete operations.
+	$_SESSION['taskDbId']=$taskId;
+}
+
+/* Escape \n, \r and \t characters and qoutes */
+function JSONescapes($str) {
+	$str=str_replace("\n", "\\n", $str);
+	$str=str_replace("\r", "\\r", $str);
+	$str=str_replace("\t", "\\t", $str);
+	$str=str_replace("&amp;", "&", $str);
+	$str=str_replace("&quot;", '\\"', $str);
+	return $str;
 }
 ?>

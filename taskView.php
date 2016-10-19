@@ -55,9 +55,8 @@ function clean_input($value) {
 
 /* Validate the users input */
 function validateTask() {
-	// Check Title has been entered.
+	// Check Title has been entered
 	$title=clean_input($_POST['title']);
-
 	if (strlen($title)<1) {
 		echo "<center>Error: Title Empty.";
 		echo "<p>Back end change not accepted!</p>";
@@ -92,10 +91,15 @@ function validateTask() {
 	$dateFrom=strtotime($dayFrom . " " . $monthFrom . " " . $yearFrom);
 	$dateToo=strtotime($dayToo . " " . $monthToo . " " . $yearToo);
 
-	// Clean comments input and add to associative array
+	// Clean comments input
 	$comments=clean_input($_POST['comments']);
-	$sanitisedPost=array("startDate"=>$dateFrom,"endDate"=>$dateToo,"title"=>$title,"comments"=>$comments);
+	
+	// Escape title and comments for SQL storage by escaping single quote.
+	$title=str_replace("'", "''", $title);
+	$comments=str_replace("'", "''", $comments);
 
+	// Return sanitised array
+	$sanitisedPost=array("startDate"=>$dateFrom,"endDate"=>$dateToo,"title"=>$title,"comments"=>$comments);
 	return $sanitisedPost;
 
 /*	-- Check Code --

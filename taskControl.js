@@ -72,8 +72,9 @@ function taskDetails(taskId) {
 			var taskDetailsJSON=JSON.parse(this.responseText);
 
 			// Set title and comment fields
-			document.getElementById('title').value=taskDetailsJSON.title;
+			document.getElementById("title").value=taskDetailsJSON.title;
 			document.getElementById("comments").innerHTML=taskDetailsJSON.comments;
+			document.getElementById("comments").value=taskDetailsJSON.comments; // Buggy on some browser if value isn't also set.
 
 			// Set Start and End date selectors
 			var dateFrom=new Date(+taskDetailsJSON.startDate*1000);
