@@ -4,11 +4,11 @@
  * - M.Button.
  */
 
-require 'dbControl.php';
+require "dbControl.php";
 require "taskView.php";
 
 function getTasks() {
-	session_unset();
+	session_unset(); // Clear task session data so it can be refreshed from DB.
 
 	// Connect to database
 	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
@@ -56,9 +56,6 @@ function checkPost() {
 		if (array_key_exists("delCancel", $_POST)) {
 			$delCancelBtn=clean_input($_POST['delCancel']);
 			// TODO: Do nothing for cancel but add delete function call here.
-			echo "show array when adding task:<br>";
-			$tasksArray=$_SESSION['taskRecords'];
-			displayTasks($tasksArray);
 		}
 
 		// echo "Save Value: " . $saveBtn . ", Forget Button: " . $delCancelBtn . "<br>";

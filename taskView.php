@@ -15,7 +15,7 @@ function displayTasks($sqlrecords) {
 		$startDate=convertDate($sqlvalues['startDate']);
 		$endDate=convertDate($sqlvalues['endDate']);
 
-		echo "<div id='task" . $taskViewId . "' class='taskPanel' onclick='expandTask(\"task" . $taskViewId . "\");'>\n";
+		echo "<div id='task" . $taskViewId . "-" . $sqlvalues['id'] ."' class='taskPanel' onclick='expandTask(\"task" . $taskViewId . "-" . $sqlvalues['id'] . "\");'>\n";
 		echo "<div class='startDateCol'>";
 		echo "Start: " . $startDate;
 		echo "</div>\n";
@@ -25,18 +25,11 @@ function displayTasks($sqlrecords) {
 		echo "<div class='endDateCol'>";
 		echo "End: " . $endDate;
 		echo "</div>\n";
-		echo "<div id='task" . $taskViewId . "Title' class='taskTitleRow'>";
+		echo "<div id='task" . $taskViewId . "-" . $sqlvalues['id'] . "Title' class='taskTitleRow'>";
 		echo $sqlvalues['title'];
 		echo "</div>\n</div>\n";
 
 		$taskViewId++;
-/*
-		echo "Start: " . $startDate . ", End: " . $endDate . "<br>";
-
-		echo "title: " . $sqlvalues['title'];
-		echo ", comments: " . $sqlvalues['comments'];
-		echo ", email: " . $sqlvalues['email'] . "<br>\n";
-*/
 	}
 }
 
