@@ -65,7 +65,6 @@
 	<div id="addButton" onclick="newTask();">+</div>
 
 	<script src="dateControl.js"></script>
-	<script>setDateField("From",2010,2020); setDateField("Too",2016,2020); setCustomDate("Too",20,11,2018);</script>
 	<script src="taskControl.js"></script>
 </body>
 </html>

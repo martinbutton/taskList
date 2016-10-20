@@ -70,14 +70,18 @@ function taskDetails(taskId) {
 	xmlhttp.onreadystatechange=function() {
 		if (this.readyState==4 && this.status==200) {
 			var taskDetailsJSON=JSON.parse(this.responseText);
+			// TODO: Check code for String containing "failed".
 
 			// Set title and comment fields
-			document.getElementById('title').value=taskDetailsJSON.title;
+			document.getElementById("title").value=taskDetailsJSON.title;
 			document.getElementById("comments").innerHTML=taskDetailsJSON.comments;
+			document.getElementById("comments").value=taskDetailsJSON.comments; // Buggy on some browser if value isn't also set.
 
 			// Set Start and End date selectors
 			var dateFrom=new Date(+taskDetailsJSON.startDate*1000);
 			var dateToo=new Date(+taskDetailsJSON.endDate*1000);
+			setDateField("From",2010,2050);
+			setDateField("Too",2010,2050);
 			setCustomDate("From",dateFrom.getDate(),dateFrom.getMonth()+1,dateFrom.getFullYear());
 			setCustomDate("Too",dateToo.getDate(),dateToo.getMonth()+1,dateToo.getFullYear());
 		}
@@ -101,11 +105,16 @@ function newTask() {
 	}
 
 	// Display new task form
+	document.getElementById("formData").reset();
 	formElem.style.display="block";
 	formElem.style.top="124px";
 	document.getElementById("newTaskForm").style.display="block";
 	document.getElementById("cancelButton").value="Cancel";
 	document.getElementById("saveButton").value="Create";
+
+	document.getElementById("comments").innerHTML="";
+	setDateField("From",2010,2050);
+	setDateField("Too",2010,2050);
 }
 
 /* pressBtn(btn) My JS Hack.  M.Button.
@@ -126,7 +135,8 @@ function validateForm() {
 		if (document.getElementById('cancelButton').value=="Cancel") { return true; }
 
 		// TODO: Provide 'Are you sure you want to delete this Task' dialog box here.
-		return false;
+		return confirm("Are you sure you want to delete the task?");
+		// return true;
 	}
 
 	// Obtain Form Data

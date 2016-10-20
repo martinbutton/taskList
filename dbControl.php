@@ -65,6 +65,39 @@ class dbControl {
 		}
 	}
 
+	/* Update a task in the database */
+	public function updateDbTask($id, $startDate, $endDate, $title, $comments, $email) {
+		$sqlcmd="update tasks set ";
+		$sqlcmd.="startDate=" . $startDate . ", ";
+		$sqlcmd.="endDate=" . $endDate . ", ";
+		$sqlcmd.="title='" . $title . "', ";
+		$sqlcmd.="comments='" . $comments . "' ";
+		$sqlcmd.="where id=" . $id;
+
+		try {
+			$sqlstm=$this->sqlconn->prepare($sqlcmd);
+			$sqlstm->execute();
+			return true;
+		}
+		catch (PDOException $e) {
+			return false;
+		}
+	}
+
+	/* Delete a task in the database */
+	public function deleteDbTask($id) {
+		$sqlcmd="delete from tasks where id=" . $id;
+
+		try {
+			$sqlstm=$this->sqlconn->prepare($sqlcmd);
+			$sqlstm->execute();
+			return true;
+		}
+		catch (PDOException $e) {
+			return false;
+		}
+	}
+
 	/* Close DB connection */
 	public function closeDb() {
 		$this->sqlconn=null;

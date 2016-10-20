@@ -46,20 +46,59 @@ function getTasks() {
 /* Check if this is a request from clicking the Cancel/Delete button or the Update/Create button */
 function checkPost() {
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
 		if (array_key_exists("submit", $_POST)) {
 			$saveBtn=clean_input($_POST['submit']);
 			if ($saveBtn=="Create") { newTask(); }
 			// TODO: Add update function call here.
+			if ($saveBtn=="Save") { updateTask(); }
 		}
 
 		if (array_key_exists("delCancel", $_POST)) {
 			$delCancelBtn=clean_input($_POST['delCancel']);
-			// TODO: Do nothing for cancel but add delete function call here.
-		}
+			if ($delCancelBtn=="Remove") { deleteTask(); }
 
-		// echo "Save Value: " . $saveBtn . ", Forget Button: " . $delCancelBtn . "<br>";
+			// NOTE: Do nothing if the Cancel button is click on the New Task Screen.
+		}
 	}
+}
+
+function deleteTask() {
+	$taskId=$_SESSION['taskDbId'];
+	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
+	if ($dbAccess->deleteDbTask($taskId)) {
+		$dbAccess->closeDb();
+		return; // Delete Successful.
+	}
+	else {
+		echo "<center>Error: Problems deleting task in database.";
+		echo "<p>Back end change not accepted!</p>";
+		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 			
+	}
+
+	// Close DB Connection
+	$dbAccess->closeDb();
+}
+
+/* Update the existing selected task */
+function updateTask() {
+	if (($sanitisedPost=validateTask())==null) { return; }
+
+	$taskId=$_SESSION['taskDbId'];
+	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
+
+	// Do update here
+	if ($dbAccess->updateDbTask($taskId,$sanitisedPost['startDate'], $sanitisedPost['endDate'], $sanitisedPost['title'], $sanitisedPost['comments'], "marty@outerorbit.org" )) {
+		$dbAccess->closeDb();
+		return; // Write Successful.
+	}
+	else  {
+		echo "<center>Error: Problems writing task update to database.";
+		echo "<p>Back end change not accepted!</p>";
+		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 	
+	}
+
+	// Close DB Connection
+	$dbAccess->closeDb();
 }
 
 /* Create a new task */

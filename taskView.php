@@ -55,9 +55,8 @@ function clean_input($value) {
 
 /* Validate the users input */
 function validateTask() {
-	// Check Title has been entered.
+	// Check Title has been entered
 	$title=clean_input($_POST['title']);
-
 	if (strlen($title)<1) {
 		echo "<center>Error: Title Empty.";
 		echo "<p>Back end change not accepted!</p>";
@@ -92,20 +91,14 @@ function validateTask() {
 	$dateFrom=strtotime($dayFrom . " " . $monthFrom . " " . $yearFrom);
 	$dateToo=strtotime($dayToo . " " . $monthToo . " " . $yearToo);
 
-	// Clean comments input and add to associative array
+	// Clean comments input
 	$comments=clean_input($_POST['comments']);
+	
+	// Escape title and comments for SQL storage by escaping single quote.
+	$title=str_replace("'", "''", $title);
+	$comments=str_replace("'", "''", $comments);
+
+	// Return sanitised array
 	$sanitisedPost=array("startDate"=>$dateFrom,"endDate"=>$dateToo,"title"=>$title,"comments"=>$comments);
-
 	return $sanitisedPost;
-
-/*	-- Check Code --
-
-	echo "dateFrom :" . $dateFrom . ", dateToo: " . $dateToo . "<br>";
-
-	// Conversion Code to check time stamp
-	$convDateFrom=getDate($dateFrom);
-	$convDateToo=getDate($dateToo);
-	echo "CONV: Day From: " . $convDateFrom['mday'] . " " . $convDateFrom['month'] . " " . $convDateFrom['year'] . "<br>";
-	echo "CONV: Day Too: " . $convDateToo['mday'] . " " . $convDateToo['month'] . " " . $convDateToo['year'] . "<br>";
-*/
 }
