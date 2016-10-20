@@ -1,18 +1,27 @@
-<?PHP session_start();?>
 <!DOCTYPE html>
+<?PHP session_start();?>
 <html>
+<!-- Task List: Task List View
+		- M.Button
+-->
 <head>
 	<title>Task List</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="taskList.css">
 	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-	<?PHP require 'taskManager.php';?>
+	<?PHP require 'taskManager.php'; require 'cookie.php';?>
 </head>
 <body>
-	<div class="pageHeading">Task List</div>
+	<div class="pageHeading">
+		Task List
+		<a href="logout.php" id="logoutLink">Logout: <?PHP userName();?></a>
+	</div>
+
+	<!-- Check if user is authenticated -->
+	<?PHP checkCookie();?>
 
 	<div id="taskListPanel">
-		<!-- TODO: Check for post incase db needs updating before reading. -->
+		<!-- Check if any data has been posted and display tasks -->
 		<?php checkPost(); getTasks();?>
 	</div>
 

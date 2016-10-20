@@ -8,8 +8,6 @@ require "dbControl.php";
 require "taskView.php";
 
 function getTasks() {
-	session_unset(); // Clear task session data so it can be refreshed from DB.
-
 	// Connect to database
 	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
 
@@ -21,7 +19,7 @@ function getTasks() {
 	}
 
 	// Check if there has been an error retrieving records from db
-	$sqlrecords=$dbAccess->readDbTasks();
+	$sqlrecords=$dbAccess->readDbTasks($_SESSION['loginUser']);
 /*	if ($sqlrecords==null) {
 		echo "<center>Error: fetching tasks from database!<br>";
 		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>";
@@ -87,7 +85,7 @@ function updateTask() {
 	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
 
 	// Do update here
-	if ($dbAccess->updateDbTask($taskId,$sanitisedPost['startDate'], $sanitisedPost['endDate'], $sanitisedPost['title'], $sanitisedPost['comments'], "marty@outerorbit.org" )) {
+	if ($dbAccess->updateDbTask($taskId,$sanitisedPost['startDate'], $sanitisedPost['endDate'], $sanitisedPost['title'], $sanitisedPost['comments'], $_SESSION['loginUser'] )) {
 		$dbAccess->closeDb();
 		return; // Write Successful.
 	}
@@ -108,7 +106,7 @@ function newTask() {
 
 	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
 
-	if ($dbAccess->insertDbTask($sanitisedPost['startDate'], $sanitisedPost['endDate'], $sanitisedPost['title'], $sanitisedPost['comments'], "marty@outerorbit.org")) {
+	if ($dbAccess->insertDbTask($sanitisedPost['startDate'], $sanitisedPost['endDate'], $sanitisedPost['title'], $sanitisedPost['comments'], $_SESSION['loginUser'])) {
 		$dbAccess->closeDb();
 		return; // Write Successful.
 	}
