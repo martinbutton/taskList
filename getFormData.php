@@ -1,10 +1,11 @@
 <?PHP
+session_start();
+
 /* Task List: Process AJAX request and return a DB entry JSON object to FE.
  * - M.Button.
  */
 
 // Obtain session details and process form value AJAX request
-session_start();
 getFormDetails();
 
 /* Process AJAX request for form data from backend session */

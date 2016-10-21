@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<?PHP session_start();?>
-<html>
-<!-- Task List: Login Page 
-		- M.Button
--->
-<head>
-	<title>Task List: Login</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="taskList.css">
-	<link rel="stylesheet" type="text/css" href="login.css">
-	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-</head>
-<body>
-	<div class="pageHeading">Task List</div>
+<?PHP session_start();
 
-<!-- PHP Code to handle POST request and set session data and cookie if requested by user -->
-<?php
+	// PHP Code to handle POST request and set session data and cookie if requested by user
 	require "taskView.php";
 
 	if ($_SERVER["REQUEST_METHOD"]) {
@@ -35,6 +20,21 @@
 		}
 	}
 ?>
+
+<!DOCTYPE html>
+<html>
+<!-- Task List: Login Page 
+		- M.Button
+-->
+<head>
+	<title>Task List: Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="taskList.css">
+	<link rel="stylesheet" type="text/css" href="login.css">
+	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+</head>
+<body>
+	<div class="pageHeading">Task List</div>
 
 <!-- Login Form -->
 <div class="taskListPanel">

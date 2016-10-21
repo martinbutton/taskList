@@ -1,5 +1,9 @@
+<?PHP session_start();
+require 'cookie.php';
+checkCookie(); // Check user is authenticated
+?>
+
 <!DOCTYPE html>
-<?PHP session_start();?>
 <html>
 <!-- Task List: Task List View
 		- M.Button
@@ -9,16 +13,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="taskList.css">
 	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-	<?PHP require 'taskManager.php'; require 'cookie.php';?>
+	<?PHP require 'taskManager.php';?>
 </head>
 <body>
 	<div class="pageHeading">
 		Task List
 		<a href="logout.php" id="logoutLink">Logout: <?PHP userName();?></a>
 	</div>
-
-	<!-- Check if user is authenticated -->
-	<?PHP checkCookie();?>
 
 	<div class="taskListPanel">
 		<!-- Check if any data has been posted and display tasks -->
