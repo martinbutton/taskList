@@ -30,6 +30,7 @@ function expandTask(taskId) {
 	}
 	else {
 		formElem.style.top=formPos(taskId) + "px";
+		formElem.style.visibility="hidden";
 		formElem.style.display="block";
 		taskElem.style.height="315px"; // Was 300px;
 		taskElem.style.backgroundColor="white";
@@ -84,6 +85,7 @@ function taskDetails(taskId) {
 			setDateField("Too",2010,2050);
 			setCustomDate("From",dateFrom.getDate(),dateFrom.getMonth()+1,dateFrom.getFullYear());
 			setCustomDate("Too",dateToo.getDate(),dateToo.getMonth()+1,dateToo.getFullYear());
+			formElem.style.visibility="visible";
 		}
 	}
 
@@ -107,6 +109,7 @@ function newTask() {
 	// Display new task form
 	document.getElementById("formData").reset();
 	formElem.style.display="block";
+	formElem.style.visibility="visible";
 	formElem.style.top="124px";
 	document.getElementById("newTaskForm").style.display="block";
 	document.getElementById("cancelButton").value="Cancel";

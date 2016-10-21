@@ -14,7 +14,7 @@ function getTasks() {
 	// Check if db connection was successful
 	if ($dbAccess==null) {
 		echo "<center>Error: Cannot connect to database!<br>";
-		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>";
+		echo "<a href='index.php' style='color: white;'>Okay</a><br><br></center>";
 		die;
 	}
 
@@ -60,6 +60,7 @@ function checkPost() {
 	}
 }
 
+/* Delete open selected task */
 function deleteTask() {
 	$taskId=$_SESSION['taskDbId'];
 	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
@@ -70,7 +71,7 @@ function deleteTask() {
 	else {
 		echo "<center>Error: Problems deleting task in database.";
 		echo "<p>Back end change not accepted!</p>";
-		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 			
+		echo "<a href='index.php' style='color: white;'>Okay</a><br><br></center>"; 			
 	}
 
 	// Close DB Connection
@@ -92,7 +93,7 @@ function updateTask() {
 	else  {
 		echo "<center>Error: Problems writing task update to database.";
 		echo "<p>Back end change not accepted!</p>";
-		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 	
+		echo "<a href='index.php' style='color: white;'>Okay</a><br><br></center>"; 	
 	}
 
 	// Close DB Connection
@@ -113,7 +114,7 @@ function newTask() {
 	else {
 		echo "<center>Error: Problems writing new task to database.";
 		echo "<p>Back end change not accepted!</p>";
-		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 
+		echo "<a href='index.php' style='color: white;'>Okay</a><br><br></center>"; 
 	}
 
 	// Close DB connection

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <?PHP session_start();?>
-
 <html>
+<!-- Task List: User Logout
+		- M.Button
+-->
 <head>
 	<title>Task List: Logout</title>
 </head>

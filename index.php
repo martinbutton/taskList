@@ -20,11 +20,12 @@
 	<!-- Check if user is authenticated -->
 	<?PHP checkCookie();?>
 
-	<div id="taskListPanel">
+	<div class="taskListPanel">
 		<!-- Check if any data has been posted and display tasks -->
 		<?php checkPost(); getTasks();?>
 	</div>
 
+	<!-- Task Form -->
 	<div id="taskForm">
 	<form id="formData" method="POST" onsubmit="return validateForm();" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<div style="margin-left: 7%; margin-right: 7%; padding-bottom: 20px;">
@@ -69,8 +70,8 @@
 	</form>
 	</div>
 
+	<!-- New task button and dialog -->
 	<div id="newTaskForm">Create a New Task</div>
-
 	<div id="addButton" onclick="newTask();">+</div>
 
 	<script src="dateControl.js"></script>

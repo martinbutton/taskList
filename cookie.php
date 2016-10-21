@@ -21,7 +21,11 @@ function checkCookie() {
 
 /* Return current login in users email address to display in Logout link */
 function userName() {
-	if (isset($_SESSION['loginUser']) || !empty($_SESSION['loginUser'])) {
+	if (isset($_SESSION['loginUser']) && !empty($_SESSION['loginUser'])) {
+		echo $_SESSION['loginUser'];
+	}
+	elseif (isset($_COOKIE['loginEmail'])) {
+		$_SESSION['loginUser']=$_COOKIE['loginEmail'];
 		echo $_SESSION['loginUser'];
 	}
 	else {

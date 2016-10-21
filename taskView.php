@@ -60,7 +60,7 @@ function validateTask() {
 	if (strlen($title)<1) {
 		echo "<center>Error: Title Empty.";
 		echo "<p>Back end change not accepted!</p>";
-		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 
+		echo "<a href='index.php' style='color: white;'>Okay</a><br><br></center>"; 
 		return null;
 	}
 
@@ -76,14 +76,14 @@ function validateTask() {
 	if (strlen($dayFrom . $monthFrom . $yearFrom)<1) {
 		echo "<center>Error: Start Date Malformed.";
 		echo "<p>Back end change not accepted!</p>";
-		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 
+		echo "<a href='index.php' style='color: white;'>Okay</a><br><br></center>"; 
 		return null;		
 	}
 
 	if (strlen($dayToo . $monthToo . $yearToo)<1) {
 		echo "<center>Error: End Date Malformed.";
 		echo "<p>Back end change not accepted!</p>";
-		echo "<a href='taskList.php' style='color: white;'>Okay</a><br><br></center>"; 
+		echo "<a href='index.php' style='color: white;'>Okay</a><br><br></center>"; 
 		return null;		
 	}
 

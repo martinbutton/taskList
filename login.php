@@ -7,10 +7,12 @@
 <head>
 	<title>Task List: Login</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--	<link rel="stylesheet" type="text/css" href="taskList.css"> -->
+	<link rel="stylesheet" type="text/css" href="taskList.css">
+	<link rel="stylesheet" type="text/css" href="login.css">
 	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 </head>
 <body>
+	<div class="pageHeading">Task List</div>
 
 <!-- PHP Code to handle POST request and set session data and cookie if requested by user -->
 <?php
@@ -29,18 +31,38 @@
 			$_SESSION['loginUser']=$email;
 
 			// Redirect to taskList
-			header("Location: http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] . "/taskList/taskList.php");
+			header("Location: http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] . "/taskList/index.php");
 		}
 	}
 ?>
 
-<h1>Login Screen</h1>
-
-<form method="POST" onsubmit="return validate();" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-	Email: <input type="text" name="email" id="email" required><br>
-	<input type="checkbox" name="cookieAccept" value="acceptCookies"> Accept Cookie Terms.</br>
-	<input type="submit" name="submit" value="Login">
-</form>
+<!-- Login Form -->
+<div class="taskListPanel">
+	<br>
+		<form method="POST" onsubmit="return validate();" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+			<div class="loginDialogBox">
+				<div style="padding-top: 20px; width: 80%; margin: auto; text-align: center; color: #003300; font-size: 16px;">Please Login:</div>
+				<div style="padding-top: 20px; margin: auto; width: 80%;">
+					Email: <input type="email" name="email" id="email" placeholder="email@example.com" required>
+				</div>
+				<br>
+				<div style="width: 120px; margin: auto;">
+					<input type="submit" name="submit" value="Login" class="loginBtn">
+				</div>
+				<div style="margin: auto; width: 80%;">
+					<input type="checkbox" name="cookieAccept" value="acceptCookies">
+					<span style="font-size: 14px;"> Keep me logged in for 28 days.</span>
+				</div>
+				<div style="font-size: 12px; border-top: 1px solid #999; width: 80%; margin: auto;">
+					<b>Cookie Note:</b> By clicking the above box you are also agreeing for cookies to be used in order to give you a better
+					experience using this web application.  Your email address maybe used in future to send task reminders only.
+					You email address will not be used for any other purpose.
+				</div>
+				</br>
+			</div>
+		</form>
+	<br>
+</div>
 
 <!-- Embedded JavaScript to validate form input -->
 <script>

@@ -23,7 +23,7 @@ body {
 	right: 5%;
 	border-radius: 0px 0px 8px 8px;
 	text-decoration: none;
-	width: 150px;
+	width: 20%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -33,7 +33,7 @@ body {
 		text-decoration: underline;
 }
 
-#taskListPanel {
+.taskListPanel {
 	background-color: #2e4b2e;
 	width: 90%;
 	margin: auto;
