@@ -1,21 +1,31 @@
-<?PHP session_start();?>
 <!DOCTYPE html>
+<?PHP session_start();?>
 <html>
+<!-- Task List: Task List View
+		- M.Button
+-->
 <head>
 	<title>Task List</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="taskList.css">
 	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-	<?PHP require 'taskManager.php';?>
+	<?PHP require 'taskManager.php'; require 'cookie.php';?>
 </head>
 <body>
-	<div class="pageHeading">Task List</div>
+	<div class="pageHeading">
+		Task List
+		<a href="logout.php" id="logoutLink">Logout: <?PHP userName();?></a>
+	</div>
 
-	<div id="taskListPanel">
-		<!-- TODO: Check for post incase db needs updating before reading. -->
+	<!-- Check if user is authenticated -->
+	<?PHP checkCookie();?>
+
+	<div class="taskListPanel">
+		<!-- Check if any data has been posted and display tasks -->
 		<?php checkPost(); getTasks();?>
 	</div>
 
+	<!-- Task Form -->
 	<div id="taskForm">
 	<form id="formData" method="POST" onsubmit="return validateForm();" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<div style="margin-left: 7%; margin-right: 7%; padding-bottom: 20px;">
@@ -60,8 +70,8 @@
 	</form>
 	</div>
 
+	<!-- New task button and dialog -->
 	<div id="newTaskForm">Create a New Task</div>
-
 	<div id="addButton" onclick="newTask();">+</div>
 
 	<script src="dateControl.js"></script>

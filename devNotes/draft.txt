@@ -40,7 +40,14 @@ Login: mysql -u taskuser -p<password> tasklist
 - form ID should be in the form: task<FE ID>-<DB ID>, ie. task0-6
 
 Phase 2:
+================================
 Allow user logins, use cookies $_COOKIE[], and session data $_SESSION[].
+Login and Cookie validation process:
+1. taskList.php runs a cookie check PHP process.
+2. Cookie check PHP program checks if session data is set, if so login.  If not, check for a cookie.
+3. If the cookie does not exist and there is no session data, redirect to login page.  Otherwise login with session data.
+4. On login screen post to PHP script to set session data and if requested, set cookie then redirect to taskList.php.
+NOTE: Task List will use session data if user does not which to set a cookie, ie. Remain logged in.
 
 Phase 3:
 Make UI/UX better with styling.
