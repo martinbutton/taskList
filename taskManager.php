@@ -7,9 +7,15 @@
 require "dbControl.php";
 require "taskView.php";
 
+// Edit dbCreds array below with DB access details and credentials.
+$dbCreds=array("host"=>"localhost","database"=>"tasklist","user"=>"taskuser","password"=>"password");
+
 function getTasks() {
+	global $dbCreds;
+
 	// Connect to database
-	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
+	$dbAccess=new dbControl($dbCreds['host'],$dbCreds['database'],$dbCreds['user'],$dbCreds['password']);
+	// $dbAccess=new dbControl("localhost","tasklist","taskuser","password");
 
 	// Check if db connection was successful
 	if ($dbAccess==null) {
@@ -62,8 +68,10 @@ function checkPost() {
 
 /* Delete open selected task */
 function deleteTask() {
+	global $dbCreds;
 	$taskId=$_SESSION['taskDbId'];
-	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
+
+	$dbAccess=new dbControl($dbCreds['host'],$dbCreds['database'],$dbCreds['user'],$dbCreds['password']);
 	if ($dbAccess->deleteDbTask($taskId)) {
 		$dbAccess->closeDb();
 		return; // Delete Successful.
@@ -80,10 +88,12 @@ function deleteTask() {
 
 /* Update the existing selected task */
 function updateTask() {
+	global $dbCreds;
+
 	if (($sanitisedPost=validateTask())==null) { return; }
 
 	$taskId=$_SESSION['taskDbId'];
-	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
+	$dbAccess=new dbControl($dbCreds['host'],$dbCreds['database'],$dbCreds['user'],$dbCreds['password']);
 
 	// Do update here
 	if ($dbAccess->updateDbTask($taskId,$sanitisedPost['startDate'], $sanitisedPost['endDate'], $sanitisedPost['title'], $sanitisedPost['comments'], $_SESSION['loginUser'] )) {
@@ -102,10 +112,12 @@ function updateTask() {
 
 /* Create a new task */
 function newTask() {
+	global $dbCreds;
+
 	// Double validate data sent from Front End
 	if (($sanitisedPost=validateTask())==null) { return; }
 
-	$dbAccess=new dbControl("localhost","tasklist","taskuser","password");
+	$dbAccess=new dbControl($dbCreds['host'],$dbCreds['database'],$dbCreds['user'],$dbCreds['password']);
 
 	if ($dbAccess->insertDbTask($sanitisedPost['startDate'], $sanitisedPost['endDate'], $sanitisedPost['title'], $sanitisedPost['comments'], $_SESSION['loginUser'])) {
 		$dbAccess->closeDb();
