@@ -1,3 +1,4 @@
+/* Create Database and required tasks table */
 create database tasklist;
 use tasklist;
 create table tasks(id int not null auto_increment primary key,
@@ -7,7 +8,7 @@ create table tasks(id int not null auto_increment primary key,
 	comments text,
 	email varchar(255));
 
-/* Uncomment below if user account also need creating */
+/* Uncomment below if user account also needs creating */
 
 /*
 create user 'taskuser'@'localhost' identified by 'password';
@@ -16,13 +17,3 @@ grant select,insert,update,delete
 	to 'taskuser'@'localhost';
 alter user 'taskuser'@'astro.outerorbit.org' password expire never;
 */
-
-/* Create test data */
-insert into tasks (startDate, endDate, title, comments, email) values (
-	1000,
-	2000,
-	"Example Task",
-	"This is an example task.",
-	"marty@outerorbit.org");
-
-delete from tasks where startDate=1000;

@@ -1,12 +1,12 @@
 Task List
 
-Program to demonstrate PHP OO design, DB access, and GIT management.
+Program to demonstrate PHP OO design, DB access, AJAX, JSON, MySQL and GIT management.
 
-Phase 1:
+Phase 1: - Complete
 ================================
 Create simple task list application.  Each row is a task with the following information:
 
-Start Date - Task Title - End Date - Completed Checkbox (Tick)
+Start Date - Task Title - End Date.
 + New task button at bottom of task list.
 
 NOTE: If the task row is clicked then it can show further details/comments about the task.  What should be displayed is the same form used to create the task so all fields can be edited, ie. Start date, Task Title, End Date, and Completed checkbox.
@@ -17,9 +17,8 @@ Start Date: <dd>-<mmm>-<yy> (use datecontrol.js)
 End Date: <dd>-<mmm>-<yy>   (use datecontrol.js)
 Title: <input type="text">
 Comments/Details: <textarea>
-Completed <checkbox>
 Submit: button
-Delete: button (but don't show when creating a new task)
+Delete: button (but don't show when creating a new task, show cancel instead)
 
 Allow for add/update and deletion of tasks.  Tasks can be updated by simply updating the input fields
 
@@ -34,32 +33,30 @@ email:		varchar(255)
 Login: mysql -u taskuser -p<password> tasklist
 
 - Create Class "dbControl" to handle DB calls.  ie. open, insert, update and delete.  File: dbControl.php
-- Create "taskView.php" to handle task representation HTML UI output and input validation.  taskView creates a sanitizedPost[] array which is a dbResults object.
+- Create "index.php" to handle task representation HTML UI output and input validation.  taskView creates a sanitizedPost[] array which is a dbResults object.
 - Create "taskManager.php" that creates an instance of "dbControl" and requires "taskView" and uses it's routines for display and validation.
 - Create "getFormData.php" used by AJAX to display data in "taskControl.js:taskDetails();" so that is can display form field values.
 - form ID should be in the form: task<FE ID>-<DB ID>, ie. task0-6
 
-Phase 2:
+Phase 2: - Complete.
 ================================
 Allow user logins, use cookies $_COOKIE[], and session data $_SESSION[].
 Login and Cookie validation process:
 1. taskList.php runs a cookie check PHP process.
 2. Cookie check PHP program checks if session data is set, if so login.  If not, check for a cookie.
-3. If the cookie does not exist and there is no session data, redirect to login page.  Otherwise login with session data.
-4. On login screen post to PHP script to set session data and if requested, set cookie then redirect to taskList.php.
-NOTE: Task List will use session data if user does not which to set a cookie, ie. Remain logged in.
+3. If the cookie does not exist and there is no session data, redirect to login page (login.php).  Otherwise login with session data.
+4. On login screen (login.php) post to PHP script to set session data and if requested, set cookie then redirect to index.php.
+NOTE: Task List will use session data if user does not have a cookie set, ie. If "Remain logged in." is ticked a cookie will be used.
 
 Phase 3:
+================================
 Make UI/UX better with styling.
-Sending of Email Reminders.
+Add visual warnings to show when an event is due or overdue.  To be placed where "title" label is on each task.
 
 Phase 4:
-Password generator.
+================================
 Email confirmation generator.
+Sending of Email Reminders.
+Pref: To set frequency of reminders and changing of email address.
 
 ----
-
-dateField={elem:"From",day:1,month:1,year:2016}; // Object to contain date selection elements
-dateField.prototype.setDate; // Prototype functions for dateField objects
-dateFieldList[]=dateField; // Array of date field objects
-event listener attach to a particular dateFieldList array object.
