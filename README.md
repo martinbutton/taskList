@@ -12,7 +12,7 @@ Deployment:
 
 Place all the files in this repository with the exception of the "devNotes" directory onto your PHP enabled web server.
 See "devNotes/makedb.sql" for SQL instructions to create the required "tasks" db table and user access.
-Modify "taskManager.php" so that Task List can access your DB.  Modify the assoiative array near the start of the program source:
+Modify "taskManager.php" so that Task List can access your DB.  Modify the associated array near the start of the program source:
 
 // Edit dbCreds array below with DB access details and credentials.
 $dbCreds=array("host"=>"localhost","database"=>"tasklist","user"=>"taskuser","password"=>"password");
