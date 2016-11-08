@@ -6,6 +6,10 @@ var formElem=document.getElementById("taskForm"); // Task Form Element
 var lastTaskId="closed"; // Task Select Toggle
 var formBtn; // Holds a value to say which form button has been clicked
 
+// Used to aid with the transition effect of the form when retrieving a task.
+var formFade={anim: null, fade: 0.00}
+
+
 /* Expand Selected Task and close others that might be open */
 function expandTask(taskId) {
 	var taskElem=document.getElementById(taskId);
@@ -85,13 +89,27 @@ function taskDetails(taskId) {
 			setDateField("Too",2010,2050);
 			setCustomDate("From",dateFrom.getDate(),dateFrom.getMonth()+1,dateFrom.getFullYear());
 			setCustomDate("Too",dateToo.getDate(),dateToo.getMonth()+1,dateToo.getFullYear());
+			formElem.style.opacity="0.00";
 			formElem.style.visibility="visible";
+			formFade.anim=setInterval(fadeOnForm,15);
 		}
 	}
 
 	// Send AJAX request to backend
 	xmlhttp.open("GET","getFormData.php?task="+taskId,true);
 	xmlhttp.send();
+}
+
+/* Fade Animation when retrieving task details */
+function fadeOnForm() {
+	if (formFade.fade<=1.00) {
+		formFade.fade+=0.05;
+		formElem.style.opacity=formFade.fade;
+	}
+	else {
+		formFade.fade=0.00;
+		clearInterval(formFade.anim);
+	}
 }
 
 /* Add a new task */

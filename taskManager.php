@@ -10,6 +10,7 @@ require "taskView.php";
 // Edit dbCreds array below with DB access details and credentials.
 $dbCreds=array("host"=>"localhost","database"=>"tasklist","user"=>"taskuser","password"=>"password");
 
+/* Retrieve tasks stored in database */
 function getTasks() {
 	global $dbCreds;
 
@@ -53,7 +54,6 @@ function checkPost() {
 		if (array_key_exists("submit", $_POST)) {
 			$saveBtn=clean_input($_POST['submit']);
 			if ($saveBtn=="Create") { newTask(); }
-			// TODO: Add update function call here.
 			if ($saveBtn=="Save") { updateTask(); }
 		}
 
@@ -91,6 +91,10 @@ function updateTask() {
 	global $dbCreds;
 
 	if (($sanitisedPost=validateTask())==null) { return; }
+
+	// Escape title and comments for SQL storage by escaping single quote.  Note: Only needs doing on update!
+	$sanitisedPost['title']=str_replace("'", "''", $sanitisedPost['title']);
+	$sanitisedPost['comments']=str_replace("'", "''", $sanitisedPost['comments']);
 
 	$taskId=$_SESSION['taskDbId'];
 	$dbAccess=new dbControl($dbCreds['host'],$dbCreds['database'],$dbCreds['user'],$dbCreds['password']);

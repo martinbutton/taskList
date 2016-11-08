@@ -27,7 +27,9 @@ function displayTasks($sqlrecords) {
 		echo "</div>\n";
 		echo "<div id='task" . $taskViewId . "-" . $sqlvalues['id'] . "Title' class='taskTitleRow'>";
 		echo $sqlvalues['title'];
-		echo "</div>\n</div>\n";
+		echo "</div>\n";
+		echo "<div style='margin-top: 120px; text-align: center; font-size: 16px; color: #2e4b2e;'>Retrieving Task Details..</div>\n";
+		echo "</div>\n";
 
 		$taskViewId++;
 	}
@@ -94,10 +96,6 @@ function validateTask() {
 	// Clean comments input
 	$comments=clean_input($_POST['comments']);
 	
-	// Escape title and comments for SQL storage by escaping single quote.
-	$title=str_replace("'", "''", $title);
-	$comments=str_replace("'", "''", $comments);
-
 	// Return sanitised array
 	$sanitisedPost=array("startDate"=>$dateFrom,"endDate"=>$dateToo,"title"=>$title,"comments"=>$comments);
 	return $sanitisedPost;
