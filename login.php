@@ -63,6 +63,9 @@
 		</form>
 	<br>
 </div>
+<div style="text-align: center; color: #1b391b; font-size: 10px; margin-top: 5px;">
+	(c)2016 Seren Software - Licensed under the Apache v2.0 License Agreement - Designed and Development by Martin Button.
+</div>
 
 <!-- Embedded JavaScript to validate form input -->
 <script>
